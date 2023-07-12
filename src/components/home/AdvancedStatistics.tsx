@@ -3,8 +3,8 @@ import detailRecognition from "../../images/icon-detailed-records.svg"
 import fulyCustomizable from "../../images/icon-fully-customizable.svg"
 const AdvancedStatistics = () => {
   return (
-    <div className=" bg-gray-200 mt-[150px] mb-20 py-10  ">
-      <div className="max-w-screen-xl  flex flex-wrap items-center  mx-auto p-4">
+    <div className=" bg-gray-200 mt-[150px] py-10">
+      <div className="max-w-screen-xl flex flex-wrap items-center mx-auto p-4">
         <div className=" bg-primary w-full py-20 rounded-md mt-[-150px]">
           <div className="lg:top-20 flex items-center justify-center">
             <form className=" flex md:flex-row flex-col items-center gap-5 w-full justify-center px-5 sm:px-10 ">
@@ -22,29 +22,45 @@ const AdvancedStatistics = () => {
             </form>
           </div>
         </div>
-
-        <div className=" pt-[150px]  w-full">
-          <div className=" flex items-center justify-center flex-col space-y-5">
+        <div className="py-10 w-full">
+          <div className="bg-white rounded-md p-5 flex md:flex-row flex-col  items-center justify-between space-y-5 md:space-y-0">
+            <div>
+              <p className=" text-lg font-medium  text-center">
+                https://react-icons.github.io/react-icons/search?q=insta
+              </p>
+            </div>
+            <div className=" flex md:flex-row flex-col  items-center gap-5">
+              <p className="text-lg font-medium text-secondary ">
+                https://rel.ink/k4lkyk
+              </p>
+              <button className=" bg-secondary px-10 py-2 rounded-md text-white font-bold w-full">
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="pt-[150px]  w-full">
+          <div className="flex items-center justify-center flex-col space-y-5">
             <h1 className=" text-gray-800 text-[35px] sm:text-[58px] text-center lg:text-left md:text-[65px] lg:text-[60px] font-bold lg:leading-[65px] xl:text-[85px] xl:leading-[90px]">
               Advanced Statistics
             </h1>
-            <p className=" md:w-[500px] sm:text-[25px] md:text-xl lg:text-[18px] font-medium  text-gray-400 text-center  ">
+            <p className="md:w-[500px] sm:text-[25px] md:text-xl lg:text-[18px] font-medium  text-gray-400 text-center">
               Build your brand's recognition and get detailed insights on how
               your links are performing
             </p>
 
-            <div className=" w-full relative ">
-              <div className=" w-full h-[7px] bg-secondary  absolute top-[280px] " />
-              <div className=" grid md:grid-cols-3   mt-[100px] gap-5 lg:gap-10 ">
-                <div className=" bg-white p-8 rounded-md shadow-xl shadow-gray-200 z-20 ">
-                  <div className=" mt-[-80px] w-[100px] flex items-center justify-center h-[100px] mb-10 bg-primary  rounded-full p-2">
+            <div className="w-full relative">
+              <div className="md:w-full md:h-[7px] h-[80%] w-[7px] bg-secondary mx-auto inset-x-24 md:inset-x-0 absolute mt-[120px] md:top-[200px]" />
+              <div className="grid md:grid-cols-3 mt-[100px] gap-5 lg:gap-10">
+                <div className=" bg-white p-8 rounded-md shadow-xl shadow-gray-200 z-20">
+                  <div className="mt-[-80px] w-[100px] flex items-center justify-center h-[100px] mb-10 bg-primary  rounded-full p-2">
                     <img
                       src={brandRecognition}
                       alt="brandRecognition"
                       className=" "
                     />
                   </div>
-                  <div className=" space-y-5">
+                  <div className="space-y-5">
                     <h2 className="text-[25px] sm:text-[35px] md:text-[25px] lg:text-3xl font-bold text-gray-800">
                       Brand Recognition
                     </h2>
@@ -55,15 +71,15 @@ const AdvancedStatistics = () => {
                     </p>
                   </div>
                 </div>
-                <div className=" bg-white p-8 rounded-md shadow-xl shadow-gray-200 z-20 mt-10 ">
-                  <div className=" mt-[-80px] w-[100px] flex items-center justify-center h-[100px] mb-10 bg-primary  rounded-full p-2">
+                <div className=" bg-white p-8 rounded-md shadow-xl shadow-gray-200 z-20 mt-10">
+                  <div className="mt-[-80px] w-[100px] flex items-center justify-center h-[100px] mb-10 bg-primary  rounded-full p-2">
                     <img
                       src={detailRecognition}
                       alt="brandRecognition"
                       className=" "
                     />
                   </div>
-                  <div className=" space-y-5">
+                  <div className="space-y-5">
                     <h2 className="text-[25px] sm:text-[35px] md:text-[25px] lg:text-3xl font-bold text-gray-800">
                       Detailed Records
                     </h2>
@@ -74,7 +90,7 @@ const AdvancedStatistics = () => {
                     </p>
                   </div>
                 </div>
-                <div className=" bg-white p-8 rounded-md shadow-xl shadow-gray-200 z-20 mt-20 ">
+                <div className=" bg-white p-8 rounded-md shadow-xl shadow-gray-200 z-20 mt-20">
                   <div className="mt-[-80px] w-[100px] flex items-center justify-center h-[100px] mb-10 bg-primary  rounded-full p-2">
                     <img
                       src={fulyCustomizable}
@@ -82,7 +98,7 @@ const AdvancedStatistics = () => {
                       className=" "
                     />
                   </div>
-                  <div className=" space-y-5">
+                  <div className="space-y-5">
                     <h2 className="text-[25px] sm:text-[35px] md:text-[25px] lg:text-3xl font-bold text-gray-800">
                       Fully Customizable
                     </h2>

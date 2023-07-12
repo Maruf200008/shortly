@@ -1,12 +1,13 @@
 import Footer from "./components/Footer"
 import Navbar from "./components/Navbar"
-import Home from "./pages/Home"
+import Edit from "./pages/Edit"
 
 function App() {
   return (
     <div className="">
       <Navbar />
-      <Home />
+      {/* <Home /> */}
+      <Edit />
       <Footer />
     </div>
   )

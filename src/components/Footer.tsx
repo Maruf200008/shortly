@@ -5,7 +5,7 @@ import logo from "../images/footer-logo.svg"
 const Footer = () => {
   return (
     <div className=" bg-[#232027]">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl  justify-between mx-auto p-4">
         <div className="grid lg:grid-cols-5 gap-5 py-20 w-full text-center lg:text-left space-y-5 lg:space-y-0">
           <div className=" flex items-center justify-center lg:items-start lg:justify-start">
             <img src={logo} alt="logo" />
@@ -53,7 +53,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className=" flex items-center justify-center lg:items-start lg:justify-start">
-            <ul className=" flex items-center gap-10   text-white">
+            <ul className=" flex items-center gap-5 xl:gap-10   text-white">
               <li className=" hover:text-secondary transition">
                 <a href="/">
                   {" "}

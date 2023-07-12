@@ -60,7 +60,7 @@ const Navbar = () => {
               </li>
               <li>
                 <a
-                  href="/Link"
+                  href="/link"
                   className="block py-2 pl-3 pr-4 text-white lg:text-gray-500 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-700 lg:p-0 sm:text-[20px]"
                 >
                   Link

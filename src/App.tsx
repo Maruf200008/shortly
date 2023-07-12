@@ -1,15 +1,21 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Footer from "./components/Footer"
 import Navbar from "./components/Navbar"
 import Edit from "./pages/Edit"
+import Home from "./pages/Home"
+import List from "./pages/List"
 
 function App() {
   return (
-    <div className="">
+    <BrowserRouter>
       <Navbar />
-      {/* <Home /> */}
-      <Edit />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/edit" element={<Edit />} />
+        <Route path="/link" element={<List />} />
+      </Routes>
       <Footer />
-    </div>
+    </BrowserRouter>
   )
 }
 

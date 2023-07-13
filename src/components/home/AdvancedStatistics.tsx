@@ -1,36 +1,36 @@
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { useGetShortUrlQuery } from "../../features/api/apiSlice"
-import { addLongUrl } from "../../features/shortUrl/shorterUrlSlice"
 import brandRecognition from "../../images/icon-brand-recognition.svg"
 import detailRecognition from "../../images/icon-detailed-records.svg"
 import fulyCustomizable from "../../images/icon-fully-customizable.svg"
 const AdvancedStatistics = () => {
-  const dispatch = useDispatch()
   const [input, setInput] = useState("")
   const [error, setError] = useState("")
+  const [longUrl, setLongUrl] = useState("")
   const [isRequest, setIsRequest] = useState(false)
 
-  const { data, refetch } = useGetShortUrlQuery(input, {
+  const { refetch } = useGetShortUrlQuery(longUrl, {
     skip: !isRequest,
   })
-  const { short, long } = useSelector((state) => state.shorterUrl)
+  console.log("Maruf")
+  console.log(longUrl)
+  console.log(isRequest)
+  const { url } = useSelector((state) => state.shorterUrl)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!input) {
       setError("Input is empty!!")
     } else {
-      dispatch(addLongUrl(input))
+      console.log("basdlfasd")
       setIsRequest(true)
+      setLongUrl(input)
       refetch()
-      setError("")
-      setInput("")
     }
   }
 
-  console.log(short)
-  console.log(long)
+  console.log(url)
 
   return (
     <div className=" bg-gray-200 mt-[150px] py-10">
@@ -63,27 +63,44 @@ const AdvancedStatistics = () => {
           )}
         </div>
         <div className="py-10 w-full">
-          <div className="bg-white rounded-md p-5 flex md:flex-row flex-col  items-center justify-between space-y-5 md:space-y-0">
-            {long
-              ? long.map((url, index) => {
-                  ;<div key={index}>
-                    <p className=" text-lg font-medium  text-center">{url}</p>
+          {url ? (
+            url
+              .slice(0, 2)
+              .reverse()
+              .sort((a, b) => b.id - a.id)
+              .map((data) => {
+                return (
+                  <div
+                    key={data?.id}
+                    className="bg-white rounded-md p-5 flex md:flex-row flex-col  items-center justify-between space-y-5 md:space-y-0"
+                  >
+                    <div>
+                      <p className=" text-lg font-medium  text-center md:text-left">
+                        {data?.longUrl}
+                      </p>
+                    </div>
+
+                    <div className=" flex md:flex-row flex-col  items-center gap-5">
+                      <p className="text-lg font-medium text-secondary ">
+                        {data?.shortUrl}
+                      </p>
+
+                      <button className=" bg-secondary px-10 py-2 rounded-md text-white font-bold w-full">
+                        Copy
+                      </button>
+                    </div>
                   </div>
-                })
-              : ""}
-            <div className=" flex md:flex-row flex-col  items-center gap-5">
-              {short
-                ? short.map((url) => {
-                    ;<p className="text-lg font-medium text-secondary ">
-                      https://rel.ink/k4lkyk
-                    </p>
-                  })
-                : ""}
-              <button className=" bg-secondary px-10 py-2 rounded-md text-white font-bold w-full">
-                Copy
-              </button>
+                )
+              })
+          ) : (
+            <div className=" bg-red-600/50 rounded-md p-5   items-center justify-between space-y-5 md:space-y-0">
+              <div className="">
+                <p className="text-lg font-medium text-white text-center ">
+                  Url Not Found!!
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="pt-[150px]  w-full">
           <div className="flex items-center justify-center flex-col space-y-5">

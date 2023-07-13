@@ -1,35 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface CounterState {
-  short: []
-  long: []
+  url: []
 }
 
-const initialState = { short: [], long: [] } as CounterState
+const initialState = { url: [] } as CounterState
 
 const shorterUrlSlice = createSlice({
   name: "shorterUrl",
   initialState,
   reducers: {
-    addLongUrl(state, action) {
-      state.long.push(action.payload)
+    addUrl(state, action) {
+      console.log(action.payload)
+      state.url.push(action.payload)
     },
-    editLongUrl(state, action) {
-      state.long = state.long.map((longUrl) => {
-        if (longUrl.code === action.payload.code) {
+    editUrl(state, action) {
+      state.long = state.url.map((longUrl) => {
+        if (longUrl.id === action.payload.id) {
           return (longUrl.url = action.payload.url)
         }
       })
     },
-    addShortUrl(state, action) {
-      state.short.push(action.payload)
-    },
-    removeShortUrl(state, action) {
-      state.short.filter(action.payload.code === state.short.code)
+
+    removeUrl(state, action) {
+      state.url.filter(action.payload.id === state.url.id)
     },
   },
 })
 
-export const { addLongUrl, editLongUrl, addShortUrl, removeShortUrl } =
-  shorterUrlSlice.actions
+export const { addUrl, editUrl, removeUrl } = shorterUrlSlice.actions
 export default shorterUrlSlice.reducer

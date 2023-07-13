@@ -14,16 +14,21 @@ const shorterUrlSlice = createSlice({
       console.log(action.payload)
       state.url.push(action.payload)
     },
-    editUrl(state, action) {
-      state.long = state.url.map((longUrl) => {
-        if (longUrl.id === action.payload.id) {
-          return (longUrl.url = action.payload.url)
-        }
-      })
-    },
+    // editUrl(state, action) {
+    //   state.long = state.url.map((longUrl) => {
+    //     if (longUrl.id === action.payload.id) {
+    //       return (longUrl.url = action.payload.url)
+    //     }
+    //   })
+    // },
 
     removeUrl(state, action) {
-      state.url.filter(action.payload.id === state.url.id)
+      console.log(action.payload)
+      console.log(state.url[0])
+      const updatedUrls = state.url.filter(
+        (data) => action.payload.id !== data.url.id,
+      )
+      state.url = updatedUrls
     },
   },
 })

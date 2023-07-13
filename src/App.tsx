@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/edit" element={<Edit />} />
+        <Route path="/edit/:urlId" element={<Edit />} />
         <Route path="/link" element={<List />} />
       </Routes>
       <Footer />

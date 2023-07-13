@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import logo from "../images/logo.svg"
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -9,9 +10,9 @@ const Navbar = () => {
     <>
       <nav className="bg-white border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="/" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img src={logo} className="h-8 mr-3" alt="Logo" />
-          </a>
+          </Link>
           <button
             data-collapse-toggle="navbar-default"
             type="button"
@@ -42,29 +43,22 @@ const Navbar = () => {
           >
             <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border  border-gray-100 rounded-lg bg-primary lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-white">
               <li>
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className="block py-2 pl-3 pr-4 text-white lg:text-gray-500 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-700 lg:p-0 sm:text-[20px]"
                   aria-current="page"
                 >
                   Home
-                </a>
+                </Link>
               </li>
+
               <li>
-                <a
-                  href="/edit"
-                  className="block py-2 pl-3 pr-4 text-white lg:text-gray-500 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-700 lg:p-0 sm:text-[20px]"
-                >
-                  Edit
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/link"
+                <Link
+                  to="/link"
                   className="block py-2 pl-3 pr-4 text-white lg:text-gray-500 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-700 lg:p-0 sm:text-[20px]"
                 >
                   Link
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

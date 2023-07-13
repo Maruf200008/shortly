@@ -10,8 +10,8 @@ export const apiSlice = createApi({
       query: (url) => `https://api.shrtco.de/v2/shorten?url=${url}`,
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
+          console.log("Bangladesh")
           const result = await queryFulfilled
-
           const uniqueId = () => {
             const dateString = Date.now()
 

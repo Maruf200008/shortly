@@ -17,7 +17,6 @@ const AdvancedStatistics = () => {
     if (!input) {
       setError("Input is empty!!")
     } else {
-      console.log("not error")
       dispatch(apiSlice.endpoints.getShortUrl.initiate(input))
         .unwrap()
         .then(() => {

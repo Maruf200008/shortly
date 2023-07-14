@@ -1,39 +1,53 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { MdDeleteForever } from "react-icons/md"
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { apiSlice } from "../../features/api/apiSlice"
 import { removeUrl } from "../../features/shortUrl/shorterUrlSlice"
 
 const EditOrDeliteUrl = () => {
   const { url } = useSelector((state) => state.shorterUrl)
   let obj = Object.assign({}, url)
-  const [input, setInput] = useState(obj[0].longUrl)
+  const [input, setInput] = useState("")
   const disptach = useDispatch()
-
   console.log(url)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (url && url.length > 0) {
+      url.slice(-1).map((data) => setInput(data.longUrl))
+    }
+  }, [url])
+
   console.log(obj)
 
   console.log(url)
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(input)
+    disptach(
+      apiSlice.endpoints.editShortUrl.initiate({ url: input, id: obj[0].id }),
+    )
+      .unwrap()
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err))
   }
 
   const handleDeleteUrl = (id) => {
     console.log(id)
     disptach(removeUrl(id))
+    navigate("/")
   }
 
   console.log(url)
   return (
     <div className=" bg-slate-200">
       <div className="max-w-screen-xl  flex flex-wrap items-center justify-between mx-auto p-4 py-20 ">
-        {url.map((data) => {
-          console.log(data)
+        {url.slice(-1).map((data) => {
           const { id, shortUrl } = data
           return (
             <div
               key={id}
-              className=" w-full lg:flex-row flex-col flex gap-10 items-center justify-center"
+              className="w-full lg:flex-row flex-col flex gap-10 items-center justify-center"
             >
               <form
                 className=" bg-white p-4 rounded-md flex md:flex-row flex-col items-center gap-5 w-full justify-center "

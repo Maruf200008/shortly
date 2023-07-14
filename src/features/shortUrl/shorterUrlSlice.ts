@@ -1,32 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface CounterState {
-  url: []
+  url: string[]
 }
 
-const initialState = { url: [] } as CounterState
+const initialState: CounterState = { url: [] }
 
 const shorterUrlSlice = createSlice({
   name: "shorterUrl",
   initialState,
   reducers: {
     addUrl(state, action) {
+      console.log(state.url)
       console.log(action.payload)
       state.url.push(action.payload)
     },
-    // editUrl(state, action) {
-    //   state.long = state.url.map((longUrl) => {
-    //     if (longUrl.id === action.payload.id) {
-    //       return (longUrl.url = action.payload.url)
-    //     }
-    //   })
-    // },
+    editUrl(state, action) {
+      console.log(action.payload)
+      state.url = state.url.map((longUrl) => {
+        if (longUrl.id === action.payload.id) {
+          longUrl = action.payload
+          console.log(JSON.stringify(longUrl))
+        }
+      })
+      return { ...state }
+    },
 
     removeUrl(state, action) {
-      console.log(action.payload)
-      console.log(state.url[0])
       const updatedUrls = state.url.filter(
-        (data) => action.payload.id !== data.url.id,
+        (data) => action.payload.id === data.id,
       )
       state.url = updatedUrls
     },

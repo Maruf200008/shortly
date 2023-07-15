@@ -12,6 +12,8 @@ const AdvancedStatistics = () => {
   const dispatch = useDispatch()
   const { url } = useSelector((state) => state.shorterUrl)
 
+  console.log("sdfsd")
+  console.log(url)
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!input) {
@@ -27,7 +29,6 @@ const AdvancedStatistics = () => {
         .catch((err) => setError(err?.data?.error))
     }
   }
-  console.log(url)
 
   return (
     <div className=" bg-gray-200 mt-[150px] py-10">
@@ -64,6 +65,7 @@ const AdvancedStatistics = () => {
             .slice(-1)
             .sort((a, b) => b.id - a.id)
             .map((data) => {
+              console.log(data)
               return (
                 <div
                   key={data?.id}

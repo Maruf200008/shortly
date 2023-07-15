@@ -2,36 +2,50 @@ import { createSlice } from "@reduxjs/toolkit"
 
 interface CounterState {
   url: []
+  editUrl: object
 }
 
-const initialState = { url: [] } as CounterState
+const initialState = { url: [], editUrl: {} } as CounterState
 
 const shorterUrlSlice = createSlice({
   name: "shorterUrl",
   initialState,
   reducers: {
     addUrl(state, action) {
-      console.log(action.payload)
+      console.log("bangladesh")
+      console.log(JSON.stringify(state.url))
       state.url.push(action.payload)
+      console.log(JSON.stringify(state.url))
     },
-    // editUrl(state, action) {
-    //   state.long = state.url.map((longUrl) => {
-    //     if (longUrl.id === action.payload.id) {
-    //       return (longUrl.url = action.payload.url)
-    //     }
-    //   })
-    // },
-
+    getUrl(state, action) {
+      console.log(action.payload)
+      state.url.map((data) => {
+        if (data.id == action.payload) {
+          console.log(JSON.stringify(data))
+          state.editUrl = data
+        }
+      })
+    },
+    editUrl(state, action) {
+      const localUrl = localStorage?.getItem("url")
+      console.log(JSON.parse(localUrl))
+      const updatedUrl = state.url.map((u) => {
+        if (u.id === action.payload.id) {
+          state.editUrl = action.payload
+          return action.payload
+        }
+        return u
+      })
+      state.url = updatedUrl
+    },
     removeUrl(state, action) {
       console.log(action.payload)
-      console.log(state.url[0])
-      const updatedUrls = state.url.filter(
-        (data) => action.payload.id !== data.url.id,
-      )
-      state.url = updatedUrls
+      const removeUrl = state.url.filter((data) => data.id !== action.payload)
+      console.log(JSON.stringify(removeUrl))
+      state.url = removeUrl
     },
   },
 })
 
-export const { addUrl, editUrl, removeUrl } = shorterUrlSlice.actions
+export const { addUrl, editUrl, removeUrl, getUrl } = shorterUrlSlice.actions
 export default shorterUrlSlice.reducer

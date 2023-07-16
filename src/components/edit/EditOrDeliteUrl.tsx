@@ -25,7 +25,6 @@ const EditOrDeliteUrl = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     disptach(apiSlice.endpoints.editShortUrl.initiate({ url: input, id }))
-    console.log("asdl")
   }
 
   const handleDeleteUrl = (id) => {
@@ -65,7 +64,7 @@ const EditOrDeliteUrl = () => {
             </div>
             <div className=" flex md:flex-row flex-col  items-center gap-5">
               <button
-                className=" bg-red-600/25 p-3 rounded-md text-red-500 font-bold w-full"
+                className=" bg-red-600/25 hover:bg-red-600 hover:text-white transition p-3 rounded-md text-red-500 font-bold w-full"
                 onClick={() => handleDeleteUrl(id)}
               >
                 <MdDeleteForever size={25} />

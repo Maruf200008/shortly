@@ -12,8 +12,6 @@ const AdvancedStatistics = () => {
   const dispatch = useDispatch()
   const { url } = useSelector((state) => state.shorterUrl)
 
-  console.log("sdfsd")
-  console.log(url)
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!input) {
@@ -65,7 +63,6 @@ const AdvancedStatistics = () => {
             .slice(-1)
             .sort((a, b) => b.id - a.id)
             .map((data) => {
-              console.log(data)
               return (
                 <div
                   key={data?.id}
@@ -92,7 +89,7 @@ const AdvancedStatistics = () => {
 
                     <Link
                       to={`/edit/${data?.id}`}
-                      className=" bg-secondary/25 p-3 rounded-md text-secondary font-bold w-full"
+                      className=" bg-secondary/25 hover:bg-secondary hover:text-white transition p-3 rounded-md text-secondary font-bold flex items-center justify-center"
                     >
                       <MdEditDocument size={25} />
                     </Link>

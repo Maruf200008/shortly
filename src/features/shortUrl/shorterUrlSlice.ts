@@ -12,23 +12,31 @@ const shorterUrlSlice = createSlice({
   initialState,
   reducers: {
     addUrl(state, action) {
-      console.log("bangladesh")
-      console.log(JSON.stringify(state.url))
-      state.url.push(action.payload)
-      console.log(JSON.stringify(state.url))
+      const existingUrl = state.url.find(
+        (url) => url.longUrl == action.payload.longUrl,
+      )
+      if (!existingUrl) {
+        state.url.push(action.payload)
+      }
     },
     getUrl(state, action) {
-      console.log(action.payload)
       state.url.map((data) => {
         if (data.id == action.payload) {
-          console.log(JSON.stringify(data))
           state.editUrl = data
         }
       })
     },
     editUrl(state, action) {
       const localUrl = localStorage?.getItem("url")
-      console.log(JSON.parse(localUrl))
+      let url = JSON.parse(localUrl)
+      const updatelocaldUrl = url.map((u) => {
+        if (u.id === action.payload.id) {
+          u = action.payload
+        }
+        return u
+      })
+      url = updatelocaldUrl
+      localStorage?.setItem("url", JSON.stringify(url))
       const updatedUrl = state.url.map((u) => {
         if (u.id === action.payload.id) {
           state.editUrl = action.payload
@@ -40,6 +48,12 @@ const shorterUrlSlice = createSlice({
     },
     removeUrl(state, action) {
       console.log(action.payload)
+      const localUrl = localStorage?.getItem("url")
+      let url = JSON.parse(localUrl)
+      console.log(url)
+      const removeLocalUrl = url.filter((u) => u.id !== action.payload)
+      url = removeLocalUrl
+      localStorage.setItem("url", JSON.stringify(url))
       const removeUrl = state.url.filter((data) => data.id !== action.payload)
       console.log(JSON.stringify(removeUrl))
       state.url = removeUrl

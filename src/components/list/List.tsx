@@ -15,7 +15,7 @@ const List = ({ data }) => {
             <Link
               to={shortUrl}
               target="_"
-              className=" bg-secondary/25 p-3 rounded-md text-secondary font-bold w-full"
+              className=" bg-secondary/25 hover:bg-secondary hover:text-white transition p-3 rounded-md text-secondary font-bold w-full"
             >
               <BiLinkExternal size={25} />
             </Link>

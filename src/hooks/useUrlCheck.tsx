@@ -12,17 +12,9 @@ const useUrlCheck = () => {
     if (localUrl) {
       const urls = JSON.parse(localUrl)
       urls.forEach((u) => {
-        const { id, shortUrl, longUrl } = u
-        dispatch(
-          addUrl({
-            id,
-            shortUrl,
-            longUrl,
-          }),
-        )
+        dispatch(addUrl(u))
       })
     }
-
     setUrlCheck(true)
   }, [])
 

@@ -9,7 +9,11 @@ import List from "./pages/List"
 function App() {
   const urlCheck = useUrlCheck()
   return !urlCheck ? (
-    <div> Loading...</div>
+    <div className=" flex items-center justify-center my-[350px]">
+      <div className="lds-circle">
+        <div className=""></div>
+      </div>
+    </div>
   ) : (
     <BrowserRouter>
       <Navbar />

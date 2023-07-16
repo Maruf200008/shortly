@@ -7,12 +7,13 @@ import brandRecognition from "../../images/icon-brand-recognition.svg"
 import detailRecognition from "../../images/icon-detailed-records.svg"
 import fulyCustomizable from "../../images/icon-fully-customizable.svg"
 const AdvancedStatistics = () => {
-  const [input, setInput] = useState("")
-  const [error, setError] = useState("")
+  const [input, setInput] = useState<string>("")
+  const [error, setError] = useState<string>("")
   const dispatch = useDispatch()
+
   const { url } = useSelector((state) => state.shorterUrl)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!input) {
       setError("Input is empty!!")
@@ -66,13 +67,13 @@ const AdvancedStatistics = () => {
               return (
                 <div
                   key={data?.id}
-                  className="bg-white rounded-md p-5 flex md:flex-row flex-col  items-center justify-between space-y-5 md:space-y-0"
+                  className="bg-white rounded-md  p-5 flex md:flex-row flex-col  items-center justify-between space-y-5 md:space-y-0"
                 >
                   <div>
                     <Link
                       to={data?.longUrl}
                       target="_"
-                      className=" text-lg font-medium  text-center md:text-left"
+                      className=" text-[15px] sm:text-lg font-medium  text-center md:text-left"
                     >
                       {data?.longUrl}
                     </Link>

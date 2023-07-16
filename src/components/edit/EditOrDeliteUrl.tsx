@@ -10,10 +10,8 @@ const EditOrDeliteUrl = () => {
 
   const { id, longUrl, shortUrl } = editUrl
   const { urlId } = useParams()
-  console.log(urlId)
-  console.log(editUrl)
 
-  const [input, setInput] = useState("")
+  const [input, setInput] = useState<string>("")
   const disptach = useDispatch()
   const navigate = useNavigate()
 
@@ -22,13 +20,12 @@ const EditOrDeliteUrl = () => {
     setInput(longUrl)
   }, [setInput, disptach, urlId, longUrl, editUrl])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     disptach(apiSlice.endpoints.editShortUrl.initiate({ url: input, id }))
   }
 
   const handleDeleteUrl = (id) => {
-    console.log(id)
     disptach(removeUrl(id))
     navigate("/")
   }

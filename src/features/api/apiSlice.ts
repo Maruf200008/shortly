@@ -12,13 +12,11 @@ export const apiSlice = createApi({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled
-
           // create a unique id
           const uniqueId = () => {
             const dateString = Date.now()
             return dateString
           }
-
           console.log("Maruf")
           let urls = JSON.parse(localStorage.getItem("url")) || []
           const newUrl = {
@@ -28,9 +26,7 @@ export const apiSlice = createApi({
           }
 
           urls.push(newUrl)
-
           localStorage.setItem("url", JSON.stringify(urls))
-
           dispatch(
             addUrl({
               id: uniqueId(),
@@ -49,13 +45,6 @@ export const apiSlice = createApi({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled
-          // localStorage.setItem(
-          //   "url",
-          //   JSON.stringify({
-          //     shortUrl: result.data.result?.full_short_link,
-          //   }),
-          // )
-
           dispatch(
             editUrl({
               id: arg.id,
@@ -63,9 +52,7 @@ export const apiSlice = createApi({
               longUrl: arg.url,
             }),
           )
-        } catch (err) {
-          console.log(err)
-        }
+        } catch (err) {}
       },
     }),
   }),

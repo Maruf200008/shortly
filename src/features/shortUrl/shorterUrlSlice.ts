@@ -47,15 +47,13 @@ const shorterUrlSlice = createSlice({
       state.url = updatedUrl
     },
     removeUrl(state, action) {
-      console.log(action.payload)
       const localUrl = localStorage?.getItem("url")
       let url = JSON.parse(localUrl)
-      console.log(url)
+
       const removeLocalUrl = url.filter((u) => u.id !== action.payload)
       url = removeLocalUrl
       localStorage.setItem("url", JSON.stringify(url))
       const removeUrl = state.url.filter((data) => data.id !== action.payload)
-      console.log(JSON.stringify(removeUrl))
       state.url = removeUrl
     },
   },

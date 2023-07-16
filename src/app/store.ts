@@ -1,11 +1,9 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit"
 import { apiSlice } from "../features/api/apiSlice"
-import counterReducer from "../features/counter/counterSlice"
 import shorterUrlReducer from "../features/shortUrl/shorterUrlSlice"
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     shorterUrl: shorterUrlReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },

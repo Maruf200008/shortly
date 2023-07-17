@@ -6,12 +6,18 @@ const useUrlCheck = () => {
   const dispatch = useDispatch()
   const [urlCheck, setUrlCheck] = useState(false)
 
+  interface urlDataType {
+    id: number
+    longUrl: string
+    shortUrl: string
+  }
+
   useEffect(() => {
     const localUrl = localStorage?.getItem("url")
 
     if (localUrl) {
       const urls = JSON.parse(localUrl)
-      urls.forEach((u) => {
+      urls.forEach((u: urlDataType) => {
         dispatch(addUrl(u))
       })
     }

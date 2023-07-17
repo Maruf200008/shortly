@@ -1,32 +1,38 @@
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit"
 import { useEffect, useState } from "react"
 import { MdDeleteForever } from "react-icons/md"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
+import { RootState } from "../../app/store"
 import { apiSlice } from "../../features/api/apiSlice"
 import { getUrl, removeUrl } from "../../features/shortUrl/shorterUrlSlice"
 
 const EditOrDeliteUrl = () => {
-  const { editUrl } = useSelector((state) => state.shorterUrl)
-
-  const { id, longUrl, shortUrl } = editUrl
-  const { urlId } = useParams()
-
-  const [input, setInput] = useState<string>("")
-  const disptach = useDispatch()
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    disptach(getUrl(urlId))
-    setInput(longUrl)
-  }, [setInput, disptach, urlId, longUrl, editUrl])
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    disptach(apiSlice.endpoints.editShortUrl.initiate({ url: input, id }))
+  interface EditUrl {
+    editUrl: EditUrl
+    id: number
+    longUrl: string
+    shortUrl: string
   }
 
-  const handleDeleteUrl = (id) => {
-    disptach(removeUrl(id))
+  const { editUrl } = useSelector(
+    (state: { shorterUrl: EditUrl }) => state.shorterUrl,
+  )
+  const { id, longUrl, shortUrl } = editUrl as EditUrl
+  const { urlId } = useParams()
+  const [input, setInput] = useState<string>("")
+  const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch()
+  const navigate = useNavigate()
+  useEffect(() => {
+    dispatch(getUrl(urlId))
+    setInput(longUrl)
+  }, [setInput, urlId, dispatch, longUrl, editUrl])
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    dispatch(apiSlice.endpoints.editShortUrl.initiate({ url: input, id }))
+  }
+  const handleDeleteUrl = (id: number) => {
+    dispatch(removeUrl(id))
     navigate("/")
   }
 

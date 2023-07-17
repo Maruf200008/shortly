@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { addUrl, editUrl } from "../shortUrl/shorterUrlSlice"
 
+type UrlDataType = {
+  id: number
+  shortUrl: string | undefined
+  longUrl: string
+}
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({}),
@@ -18,7 +23,7 @@ export const apiSlice = createApi({
             return dateString
           }
           console.log("Maruf")
-          let urls = JSON.parse(localStorage.getItem("url")) || []
+          let urls = JSON.parse(localStorage.getItem("url") || "[]")
           const newUrl = {
             id: uniqueId(),
             shortUrl: result.data.result?.full_short_link,
@@ -32,11 +37,9 @@ export const apiSlice = createApi({
               id: uniqueId(),
               shortUrl: result.data.result?.full_short_link,
               longUrl: arg,
-            }),
+            } as UrlDataType),
           )
-        } catch (err) {
-          console.log(err)
-        }
+        } catch (err) {}
       },
     }),
     editShortUrl: builder.query({

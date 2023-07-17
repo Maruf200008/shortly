@@ -1,11 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-interface CounterState {
-  url: []
-  editUrl: object
+interface urlDataType {
+  id: number
+  longUrl: string
+  shortUrl: string
+}
+interface editurlDataType {
+  id: number
+  longUrl: string
+  shortUrl: string
 }
 
-const initialState = { url: [], editUrl: {} } as CounterState
+interface CounterState {
+  url: urlDataType[]
+  editUrl: editurlDataType
+}
+
+const initialState = {
+  url: [],
+  editUrl: {
+    id: 0,
+    longUrl: "",
+    shortUrl: "",
+  },
+} as CounterState
 
 const shorterUrlSlice = createSlice({
   name: "shorterUrl",
@@ -13,14 +31,15 @@ const shorterUrlSlice = createSlice({
   reducers: {
     addUrl(state, action) {
       const existingUrl = state.url.find(
-        (url) => url.longUrl == action.payload.longUrl,
+        (url: urlDataType) => url.longUrl === action.payload.longUrl,
       )
       if (!existingUrl) {
-        state.url.push(action.payload)
+        const urlToAdd = action.payload as urlDataType
+        state.url.push(urlToAdd)
       }
     },
     getUrl(state, action) {
-      state.url.map((data) => {
+      state.url.map((data: urlDataType) => {
         if (data.id == action.payload) {
           state.editUrl = data
         }
@@ -28,29 +47,31 @@ const shorterUrlSlice = createSlice({
     },
     editUrl(state, action) {
       const localUrl = localStorage?.getItem("url")
-      let url = JSON.parse(localUrl)
-      const updatelocaldUrl = url.map((u) => {
-        if (u.id === action.payload.id) {
+      let url = JSON.parse(localUrl || "null")
+      const updatelocaldUrl = url.map((u: urlDataType) => {
+        if (u.id == action.payload.id) {
           u = action.payload
         }
         return u
       })
       url = updatelocaldUrl
       localStorage?.setItem("url", JSON.stringify(url))
-      const updatedUrl = state.url.map((u) => {
-        if (u.id === action.payload.id) {
+      const updatedUrl = state.url.map((u: urlDataType) => {
+        if (u.id == action.payload.id) {
           state.editUrl = action.payload
           return action.payload
         }
         return u
       })
-      state.url = updatedUrl
+      state.url = updatedUrl as urlDataType[]
     },
     removeUrl(state, action) {
       const localUrl = localStorage?.getItem("url")
-      let url = JSON.parse(localUrl)
+      let url = JSON.parse(localUrl || "null")
 
-      const removeLocalUrl = url.filter((u) => u.id !== action.payload)
+      const removeLocalUrl = url.filter(
+        (u: urlDataType) => u.id !== action.payload,
+      )
       url = removeLocalUrl
       localStorage.setItem("url", JSON.stringify(url))
       const removeUrl = state.url.filter((data) => data.id !== action.payload)

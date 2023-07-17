@@ -1,24 +1,30 @@
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit"
 import { useState } from "react"
 import { MdEditDocument } from "react-icons/md"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { RootState } from "../../app/store"
 import { apiSlice } from "../../features/api/apiSlice"
 import brandRecognition from "../../images/icon-brand-recognition.svg"
 import detailRecognition from "../../images/icon-detailed-records.svg"
 import fulyCustomizable from "../../images/icon-fully-customizable.svg"
+
 const AdvancedStatistics = () => {
+  interface dataType {
+    id: number
+    longUrl: string
+    shortUrl: string
+  }
+
   const [input, setInput] = useState<string>("")
   const [error, setError] = useState<string>("")
-  const dispatch = useDispatch()
-
-  const { url } = useSelector((state) => state.shorterUrl)
-
+  const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch()
+  const { url } = useSelector((state: RootState) => state.shorterUrl)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!input) {
       setError("Input is empty!!")
     } else {
-      console.log("not error")
       dispatch(apiSlice.endpoints.getShortUrl.initiate(input))
         .unwrap()
         .then(() => {
@@ -62,8 +68,8 @@ const AdvancedStatistics = () => {
         <div className="py-10 w-full">
           {url
             .slice(-1)
-            .sort((a, b) => b.id - a.id)
-            .map((data) => {
+            .sort((a: dataType, b: dataType) => b.id - a.id)
+            .map((data: dataType) => {
               return (
                 <div
                   key={data?.id}

@@ -1,7 +1,6 @@
 import { BiLinkExternal } from "react-icons/bi"
 import { Link } from "react-router-dom"
 const List = ({ data }: { data: { id: number; shortUrl: string } }) => {
-  console.log(data)
   const { shortUrl } = data || {}
   return (
     <div>
